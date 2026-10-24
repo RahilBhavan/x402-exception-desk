@@ -19,5 +19,13 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Lint
+        run: |
+          python3 -m pip install ruff==0.17.2
+          ruff check .
       - name: Run tests and release checks
         run: python3 scripts/release.py
+      - name: Fail if the release changed a tracked or new file
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain)"

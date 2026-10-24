@@ -14,7 +14,6 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-
 SYNTHETIC_LABEL = "synthetic"
 CLAIM_BOUNDARY = "chain evidence does not prove delivery"
 JSON_FILES = (

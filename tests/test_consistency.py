@@ -7,7 +7,6 @@ from pathlib import Path
 
 from exception_desk.consistency import ConsistencyError, assert_artifacts_consistent, audit_artifacts
 
-
 BOUNDARY = "Chain evidence does not prove delivery."
 
 
@@ -50,23 +49,27 @@ class ConsistencyTests(unittest.TestCase):
         common = ["run_id", "fixture_sha256", "oracle_sha256", "policy_workload_hash", "data_classification", "claim_boundary"]
         with (output / "reconciliation.csv").open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=["fixture_id", *common])
-            writer.writeheader(); writer.writerow({"fixture_id": "case-1", **meta})
+            writer.writeheader()
+            writer.writerow({"fixture_id": "case-1", **meta})
         with (output / "policy-results.csv").open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=[*metrics, *common])
-            writer.writeheader(); writer.writerow({**metrics, **meta})
+            writer.writeheader()
+            writer.writerow({**metrics, **meta})
         attrs = " ".join(f'data-{key.replace("_", "-")}="{meta[key]}"' for key in ("run_id", "fixture_sha256", "oracle_sha256", "policy_workload_hash"))
         (output / "operator-report.html").write_text(f'<html {attrs}><body>SIMULATED DATA. {BOUNDARY}</body></html>', encoding="utf-8")
 
     def test_complete_consistent_bundle_passes(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory); self._write_fixture(root)
+            root = Path(directory)
+            self._write_fixture(root)
             report = assert_artifacts_consistent(root)
             self.assertEqual("PASS", report["status"])
             self.assertTrue(all(item["status"] == "PASS" for item in report["checks"]))
 
     def test_detects_intentional_policy_csv_drift(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory); self._write_fixture(root)
+            root = Path(directory)
+            self._write_fixture(root)
             path = root / "artifacts" / "generated" / "policy-results.csv"
             path.write_text(path.read_text(encoding="utf-8").replace("fifo,0,1", "fifo,2,1"), encoding="utf-8")
             report = audit_artifacts(root)
@@ -77,7 +80,8 @@ class ConsistencyTests(unittest.TestCase):
 
     def test_detects_fixture_drift_and_missing_claim_boundary(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory); self._write_fixture(root)
+            root = Path(directory)
+            self._write_fixture(root)
             with (root / "data" / "incidents-v1.jsonl").open("a", encoding="utf-8") as handle:
                 handle.write('{"fixture_id":"case-2","event_id":"event-2"}\n')
             html = root / "artifacts" / "generated" / "operator-report.html"
@@ -89,7 +93,8 @@ class ConsistencyTests(unittest.TestCase):
 
     def test_detects_scenario_count_drift(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory); self._write_fixture(root)
+            root = Path(directory)
+            self._write_fixture(root)
             path = root / "artifacts" / "generated" / "scenario-sweep-summary.json"
             value = json.loads(path.read_text(encoding="utf-8"))
             value["scenario_count"] = 11
@@ -99,7 +104,8 @@ class ConsistencyTests(unittest.TestCase):
 
     def test_malformed_json_fails_closed(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory); self._write_fixture(root)
+            root = Path(directory)
+            self._write_fixture(root)
             (root / "artifacts" / "generated" / "policy-results.json").write_text("{", encoding="utf-8")
             with self.assertRaises(json.JSONDecodeError):
                 assert_artifacts_consistent(root)

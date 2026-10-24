@@ -291,7 +291,7 @@ Important generated files include:
 
 The generated `reconciliation.csv` is populated from the oracle's expected financials. It is an expected reconciliation export, not an independently calculated transaction ledger. Reducer-calculated amounts are proven through oracle conformance.
 
-The consistency gate covers authoritative inputs and generated JSON, CSV, and HTML. The release command separately hashes the PDF, workbook, and video, builds a deterministic ZIP, tests the archive, and emits its SHA-256 checksum.
+The consistency gate covers authoritative inputs and generated JSON, CSV, and HTML. The release command separately hashes the PDF, workbook, and video, builds the ZIP with a fixed file order, timestamps and permissions, tests the archive, and emits its SHA-256 checksum. The checksum matched on Python 3.9, 3.11 and 3.14 on 2026-10-24; it is not proven for every platform. The SQLite file is excluded from the ZIP because its bytes vary with the SQLite build.
 
 ```mermaid
 flowchart TB
@@ -315,7 +315,7 @@ flowchart TB
 
 ## Tests
 
-The 66 tests cover:
+The 67 tests cover:
 
 - fixture shape, uniqueness, ordering, and synthetic labels;
 - reducer transitions, timeout recovery, evidence conflicts, and refund limits;
@@ -393,7 +393,7 @@ timeline
 - The seeded sweep is deterministic.
 - The local recharge control always refuses.
 - Generated machine-readable artifacts agree.
-- The 66 tests pass for the implemented rules.
+- The 67 tests pass for the implemented rules.
 
 ## What is not proven
 
