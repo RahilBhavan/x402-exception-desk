@@ -202,7 +202,9 @@ def simulate_policy(
         "overdue_count": sum(outcome["overdue_minutes"] > 0 for outcome in outcomes),
         "median_resolution_delay_minutes": median(delays) if delays else 0.0,
         "p95_resolution_delay_minutes": _percentile_95(delays),
-        "value_weighted_overdue_minutes": sum(
+        # fsum is exactly rounded; plain sum() changed in Python 3.12 (compensated),
+        # which altered released bytes across versions.
+        "value_weighted_overdue_minutes": math.fsum(
             outcome["amount_atomic"] * outcome["overdue_minutes"] for outcome in outcomes
         ),
         "unfinished_count": len(pending),
