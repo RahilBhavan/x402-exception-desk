@@ -1,4 +1,5 @@
 import unittest
+from fractions import Fraction
 
 from exception_desk.policy import compare_policies, compare_policy_set, simulate_policy
 
@@ -52,6 +53,13 @@ class PolicySimulationTests(unittest.TestCase):
 
         self.assertLess(deadline["overdue_count"], fifo["overdue_count"])
         self.assertGreater(deadline["value_weighted_overdue_minutes"], fifo["value_weighted_overdue_minutes"])
+
+    def test_value_weighted_overdue_is_exactly_rounded_on_every_python(self):
+        # plain sum() is compensated on Python 3.12+ but not on 3.11, so it would differ by version.
+        cases = [case(f"c{i}", 0, 0, 1_000_003 + i * 7, 0, 0.3) for i in range(40)]
+        result = simulate_policy(cases, "fifo", horizon=10_000)
+        exact = sum(Fraction(o["amount_atomic"]) * Fraction(o["overdue_minutes"]) for o in result["outcomes"])
+        self.assertEqual(result["value_weighted_overdue_minutes"], float(exact))
 
     def test_horizon_reports_unfinished_count_and_value(self):
         cases = [case("short", 0, 10, 3, 0, 2), case("long", 1, 20, 11, 1, 10, 2)]
