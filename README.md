@@ -79,9 +79,11 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v   # tests
 PYTHONPATH=src python3 -m exception_desk.cli --root .     # regenerate outputs
 ```
 
-Then open `artifacts/generated/operator-report.html` in a browser. On 2026-10-21 the suite ran 66 tests and passed (`Ran 66 tests`, `OK`).
+Then open `artifacts/generated/operator-report.html` in a browser. On 2026-10-24 the suite ran 67 tests and passed on Python 3.9, 3.11 and 3.14 (`Ran 67 tests`, `OK`).
 
 The release checks the memo, workbook, and video, but it does not rebuild them. `work/build_memo.py` needs `reportlab`, and `work/build_demo.py` needs `Pillow` and `imageio-ffmpeg`. The workbook comes from a separate spreadsheet tool that is not part of this repository, so the committed workbook is the source of truth.
+
+The ZIP's file list and contents are fixed, but its checksum is not portable. The SQLite file inside it (`artifacts/generated/exception-desk.sqlite`) differs byte for byte between Python builds, so `release.py` changes the tracked ZIP, checksum, and SQLite file on each machine. Run `git checkout -- .` afterwards if you do not want those changes.
 
 ## Repository layout
 
