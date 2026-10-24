@@ -8,10 +8,10 @@ The repository is ready to share as a **independent synthetic case study**. It i
 
 | Check | Command | Result |
 |---|---|---|
-| Full automated suite | `PYTHONPATH=src python3 -m unittest discover -s tests -v` | PASS — 66 tests |
+| Full automated suite | `PYTHONPATH=src python3 -m unittest discover -s tests -v` | PASS — 67 tests (2026-10-24) |
 | Reproducible build | `PYTHONPATH=src python3 -m exception_desk.cli --root .` | PASS — stable run `run-a6cf865a0efd58de`; 16 cases; 65 events; 3,600 scenarios |
 | Cross-artifact gate | `PYTHONPATH=src python3 -c 'from pathlib import Path; from exception_desk.consistency import assert_artifacts_consistent; print(assert_artifacts_consistent(Path.cwd())["status"])'` | PASS — 26 checks |
-| Complete release | `python3 scripts/release.py` | PASS — deterministic ZIP and checksum in `outputs/x402-exception-desk-package.zip.sha256` |
+| Complete release | `python3 scripts/release.py` | PASS — ZIP and checksum rebuilt in `outputs/x402-exception-desk-package.zip.sha256` |
 
 The gate verifies authoritative input hashes, shared run identity, case/event/oracle counts, four-policy CSV/JSON agreement, scenario count, synthetic labels, and the boundary that chain evidence does not prove delivery.
 

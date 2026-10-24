@@ -315,7 +315,7 @@ flowchart TB
 
 ## Tests
 
-The 66 tests cover:
+The 67 tests cover:
 
 - fixture shape, uniqueness, ordering, and synthetic labels;
 - reducer transitions, timeout recovery, evidence conflicts, and refund limits;
@@ -393,7 +393,7 @@ timeline
 - The seeded sweep is deterministic.
 - The local recharge control always refuses.
 - Generated machine-readable artifacts agree.
-- The 66 tests pass for the implemented rules.
+- The 67 tests pass for the implemented rules.
 
 ## What is not proven
 
