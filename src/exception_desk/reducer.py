@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
 import json
+from copy import deepcopy
 from typing import Any, Iterable, Mapping
 
 from .store import InvalidEvent, parse_timestamp, validate_event
-
 
 BUSINESS_EXCEPTIONS = {
     "authorization_rejected": ("authorization_rejected", True),

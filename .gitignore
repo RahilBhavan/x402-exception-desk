@@ -16,3 +16,4 @@ work/demo.mov
 work/build_demo
 *.inspect.ndjson
 
+artifacts/generated/exception-desk.sqlite

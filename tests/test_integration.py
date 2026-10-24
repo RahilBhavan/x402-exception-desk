@@ -7,7 +7,6 @@ from exception_desk.cli import build
 from exception_desk.fixtures import group_by_fixture, load_jsonl, reducer_events
 from exception_desk.reducer import reduce_events
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 

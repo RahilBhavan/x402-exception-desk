@@ -1,9 +1,15 @@
 """Build reproducible local artifacts for the simulated exception desk."""
 from __future__ import annotations
-import argparse, csv, hashlib, json, shutil
+
+import argparse
+import csv
+import hashlib
+import json
+import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+
 from .case_projection import oracle_conformance
 from .consistency import assert_artifacts_consistent, sha256_file
 from .experiments import run_scenario_sweep
@@ -22,7 +28,8 @@ def _policy_cases(groups: dict[str, list[dict[str, Any]]], oracle: dict[str, Any
     expected = {case["fixture_id"]: case for case in oracle["cases"]}
     cases = []
     for fixture_id, events in groups.items():
-        if not expected[fixture_id]["actionable"]: continue
+        if not expected[fixture_id]["actionable"]:
+            continue
         order = next(event for event in events if event["event_type"] == "order_opened")
         cases.append({"case_id": fixture_id, "opened_at": events[0]["observed_at"],
             "deadline": order["payload"]["deadline"],
@@ -58,7 +65,8 @@ def build(root: Path) -> dict[str, Any]:
     groups = group_by_fixture(events)
     states: dict[str, Any] = {}
     database = output / "exception-desk.sqlite"
-    if database.exists(): database.unlink()
+    if database.exists():
+        database.unlink()
     with EventStore(database) as store:
         for fid, fixture_events in groups.items():
             store.append_many(reducer_events(fixture_events))
@@ -79,7 +87,8 @@ def build(root: Path) -> dict[str, Any]:
         "oracle-conformance.json": {"_meta": meta, "results": conformance}}
     for name, payload in outputs.items():
         (output / name).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    scenario = run_scenario_sweep(); scenario.pop("scenarios")
+    scenario = run_scenario_sweep()
+    scenario.pop("scenarios")
     (output / "scenario-sweep-summary.json").write_text(json.dumps({"_meta": meta, **scenario}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     common = ["run_id", "fixture_sha256", "oracle_sha256", "policy_workload_hash", "data_classification", "claim_boundary"]
@@ -87,15 +96,20 @@ def build(root: Path) -> dict[str, Any]:
         "value_weighted_overdue_minutes", "unfinished_count", "unfinished_value_atomic", "touches",
         "control_failures", "workload_fingerprint"]
     with (output / "policy-results.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=metrics + common, lineterminator="\n"); writer.writeheader()
-        for result in results.values(): writer.writerow({**{f: result[f] for f in metrics}, **meta})
+        writer = csv.DictWriter(handle, fieldnames=metrics + common, lineterminator="\n")
+        writer.writeheader()
+        for result in results.values():
+            writer.writerow({**{f: result[f] for f in metrics}, **meta})
     with (output / "reconciliation.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["fixture_id", "captured_atomic", "reserved_refund_atomic", "completed_refund_atomic", *common], lineterminator="\n"); writer.writeheader()
-        for case in oracle["cases"]: writer.writerow({"fixture_id": case["fixture_id"], **case["expected_financials"], **meta})
+        writer = csv.DictWriter(handle, fieldnames=["fixture_id", "captured_atomic", "reserved_refund_atomic", "completed_refund_atomic", *common], lineterminator="\n")
+        writer.writeheader()
+        for case in oracle["cases"]:
+            writer.writerow({"fixture_id": case["fixture_id"], **case["expected_financials"], **meta})
 
     expected = {case["fixture_id"]: case for case in oracle["cases"]}
     cases = [_ui_case(fid, es, states[fid], expected[fid], meta) for fid, es in groups.items()]
-    first = cases[0]; report = output / "operator-report.html"
+    first = cases[0]
+    report = output / "operator-report.html"
     write_operator_report(report, first["projection"], first["exception"], results,
         stylesheet_href="operator-report.css", cases=cases[1:], traceability=first["traceability"], sweep=scenario)
     html = report.read_text(encoding="utf-8")
@@ -118,7 +132,9 @@ def build(root: Path) -> dict[str, Any]:
     return summary
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__); parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=Path.cwd())
     print(json.dumps(build(parser.parse_args().root.resolve()), indent=2))
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()

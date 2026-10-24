@@ -2,7 +2,6 @@
 """Build, verify, and package the project with only the Python standard library."""
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import shutil
@@ -86,6 +85,7 @@ def _package_paths() -> list[Path]:
             and "__pycache__" not in path.parts
             and path.suffix not in {".pyc", ".pyo"}
             and path.name != ".DS_Store"
+            and path.suffix != ".sqlite"  # byte layout varies with the SQLite build
             and not path.name.endswith(".inspect.ndjson")
             and path.relative_to(ROOT).as_posix() not in ignored
         )

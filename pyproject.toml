@@ -10,3 +10,12 @@ exception-desk = "exception_desk.cli:main"
 [tool.unittest]
 start-directory = "tests"
 
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+extend-exclude = ["work"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E501"]

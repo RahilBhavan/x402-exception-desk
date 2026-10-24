@@ -4,7 +4,6 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 EVENTS_PATH = ROOT / "data" / "incidents-v1.jsonl"
 ORACLE_PATH = ROOT / "data" / "incidents-v1.oracle.json"

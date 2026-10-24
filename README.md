@@ -83,7 +83,7 @@ Then open `artifacts/generated/operator-report.html` in a browser. On 2026-10-24
 
 The release checks the memo, workbook, and video, but it does not rebuild them. `work/build_memo.py` needs `reportlab`, and `work/build_demo.py` needs `Pillow` and `imageio-ffmpeg`. The workbook comes from a separate spreadsheet tool that is not part of this repository, so the committed workbook is the source of truth.
 
-The ZIP's file list and contents are fixed, but its checksum is not portable. The SQLite file inside it (`artifacts/generated/exception-desk.sqlite`) differs byte for byte between Python builds, so `release.py` changes the tracked ZIP, checksum, and SQLite file on each machine. Run `git checkout -- .` afterwards if you do not want those changes.
+The ZIP has a fixed file order, timestamps and permissions. On 2026-10-24 `release.py` produced the same ZIP checksum on Python 3.9, 3.11 and 3.14, and left every tracked file unchanged. The generated SQLite file (`artifacts/generated/exception-desk.sqlite`) is not tracked or packaged, because its bytes differ between SQLite builds. CI fails if the release changes a tracked file. That check does not prove the checksum on other platforms or zlib builds.
 
 ## Repository layout
 
