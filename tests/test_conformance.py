@@ -1,10 +1,10 @@
 import unittest
 from pathlib import Path
 
-from exception_desk.case_projection import oracle_conformance, project_case as compatibility_project_case
+from exception_desk.case_projection import oracle_conformance
+from exception_desk.case_projection import project_case as compatibility_project_case
 from exception_desk.fixtures import group_by_fixture, load_jsonl, load_oracle
 from exception_desk.reducer import project_case
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

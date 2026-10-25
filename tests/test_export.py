@@ -1,6 +1,6 @@
+import re
 import tempfile
 import unittest
-import re
 from pathlib import Path
 
 from exception_desk.export import render_operator_report, write_operator_report
@@ -178,8 +178,10 @@ class OperatorReportTests(unittest.TestCase):
             "hybrid": {"overdue_count": 4, "total_control_failures": 0,
                        "value_weighted_overdue_minutes": 982100000.0},
         }
-        metric = lambda vwo, p95: {"value_weighted_overdue_minutes": {"win_rate": vwo},
-                                   "p95_resolution_delay_minutes": {"win_rate": p95}}
+        def metric(vwo, p95):
+            return {"value_weighted_overdue_minutes": {"win_rate": vwo},
+                    "p95_resolution_delay_minutes": {"win_rate": p95}}
+
         sweep = {"scenario_count": 3600, "summary": {
             "fifo": metric(0.074, 0.5), "deadline_first": metric(0.22, 0.111), "hybrid": metric(0.405, 0.213)}}
 

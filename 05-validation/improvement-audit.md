@@ -35,4 +35,4 @@ Use [`../artifacts/operator-task-protocol.md`](../artifacts/operator-task-protoc
 - Workload identity establishes a fair policy comparison, not realistic handling-time assumptions.
 - Automated checks cannot validate judgment, navigation clarity, or practitioner confidence.
 - No external reviewers, live Base transaction, production x402 integration, or customer-data evidence is claimed.
-- The cross-artifact gate covers generated JSON, CSV, HTML, and authoritative inputs. The higher-level release command directly hashes the PDF, workbook, and video in `artifacts/package-manifest.json`, then hashes and tests the deterministic ZIP.
+- The cross-artifact gate covers generated JSON, CSV, HTML, and authoritative inputs. The higher-level release command directly hashes the PDF, workbook, and video in `artifacts/package-manifest.json`, then hashes and tests the ZIP. The ZIP has a fixed file order, timestamps and permissions, and its checksum matched on Python 3.9, 3.11 and 3.14 on 2026-10-24; that is not a proof for every platform or zlib build.

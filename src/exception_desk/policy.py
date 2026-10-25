@@ -7,17 +7,16 @@ which prevents a policy from using future availability information.
 
 from __future__ import annotations
 
-from copy import deepcopy
-from datetime import datetime
-from hashlib import sha256
 import heapq
 import json
 import math
+from copy import deepcopy
+from datetime import datetime
+from hashlib import sha256
 from statistics import median
 from typing import Any, Iterable, Mapping, Optional
 
 from .store import parse_timestamp
-
 
 REQUIRED_FIELDS = (
     "case_id",

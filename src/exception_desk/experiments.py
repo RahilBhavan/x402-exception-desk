@@ -8,14 +8,13 @@ workload and are judged on the metrics declared below before execution.
 
 from __future__ import annotations
 
-from itertools import product
 import math
 import random
+from itertools import product
 from statistics import median
 from typing import Any, Iterable, Mapping, Sequence
 
 from .policy import compare_policy_set
-
 
 POLICY_NAMES = ("fifo", "deadline_first", "value_first", "hybrid")
 PREDECLARED_METRICS = (

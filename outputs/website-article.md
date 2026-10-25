@@ -81,7 +81,7 @@ The repository includes one release command:
 python3 scripts/release.py
 ```
 
-The command runs 66 tests, regenerates the artifacts, runs 26 cross-artifact checks, verifies the PDF, workbook, and video hashes, and builds a deterministic ZIP. It also writes a SHA-256 checksum for that archive.
+The command runs 67 tests, regenerates the artifacts, runs 26 cross-artifact checks, verifies the PDF, workbook, and video hashes, and builds the ZIP. It also writes a SHA-256 checksum for that archive.
 
 The consistency checks compare run IDs, fixture hashes, oracle hashes, workload hashes, record counts, policy metrics, scenario counts, and synthetic-data labels. They also require the claim boundary that chain evidence does not prove delivery.
 
