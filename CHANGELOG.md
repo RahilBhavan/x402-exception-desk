@@ -5,9 +5,11 @@
 ### Added
 
 - `docs/x-post-chart/`: the scenario-sweep chart for the X post as a landscape and a square PNG, with its build script and alt text. The numbers come from `scenario-sweep-summary.json`.
+- `DESIGN.md`: the design spec for the post cards (navy and red, Roboto Slab and Archivo, 26px minimum text, 1024x640 and 1024x1024).
 
 ### Changed
 
+- The sweep card's landscape PNG is now 1024x640 (2048x1280 at 2x), up from 1024x576. The square PNG is unchanged.
 - The generated SQLite file is no longer tracked or packaged, because its bytes differ between SQLite builds. The release ZIP and checksum now match on Python 3.9, 3.11 and 3.14.
 - The release ZIP checksum changed from the one published with v1.1.0. The generated SQLite file left the package, and the earlier ZIP predated the changes in #6.
 - Correction to v1.1.0: the entry that says memo PDF rebuilds are byte-identical was not checked. The builder sets fixed dates and a fixed document ID, but the release does not rebuild the memo and CI does not compare rebuilds.

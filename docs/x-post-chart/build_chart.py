@@ -6,7 +6,7 @@ win rates become one-decimal percentages, and the best policy per objective is t
 It needs the Python standard library plus Node with Playwright and a browser (`npm install playwright`,
 `npx playwright install firefox`). Set PLAYWRIGHT_NODE_MODULES to the node_modules directory if Node cannot find
 Playwright, and BROWSER to firefox (default), chromium or webkit.
-Outputs, next to this file: scenario-sweep-landscape.png (2048x1152), scenario-sweep-square.png (2048x2048)
+Outputs, next to this file: scenario-sweep-landscape.png (2048x1280), scenario-sweep-square.png (2048x2048)
 and alt-text.txt.
 """
 from __future__ import annotations
@@ -26,7 +26,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SUMMARY = ROOT / "artifacts" / "generated" / "scenario-sweep-summary.json"
 SCALE = 2
-CANVASES = {"landscape": (1024, 576), "square": (1024, 1024)}
+CANVASES = {"landscape": (1024, 640), "square": (1024, 1024)}
 
 TITLE = "No queue rule wins every objective"
 SWEEP_LINE = "0/15 min evidence delay x 0/10 min finality delay"
@@ -136,12 +136,12 @@ td {{ font-variant-numeric: tabular-nums; }}
 td.win span {{ font-weight: 800; text-decoration: underline; text-decoration-color: {RED};
   text-decoration-thickness: 4px; text-underline-offset: 6px; text-decoration-skip-ink: none; }}
 .source {{ font-weight: 500; letter-spacing: -0.015em; white-space: nowrap; }}
-.landscape {{ padding: 28px 36px 24px; }}
+.landscape {{ padding: 32px 36px 28px; }}
 .landscape h1 {{ font-size: 44px; }}
 .landscape .lede {{ margin-top: 6px; }}
 .landscape table {{ margin-top: 12px; }}
 .landscape col.label {{ width: 41%; }}
-.landscape th, .landscape td {{ padding: 8px 0; }}
+.landscape th, .landscape td {{ padding: 11px 0; }}
 .landscape td {{ font-size: 30px; }}
 .landscape .note {{ margin-top: 12px; }}
 .landscape .source {{ margin-top: 6px; }}
