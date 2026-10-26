@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `docs/x-post-chart/`: the scenario-sweep chart for the X post as a landscape and a square PNG, with its build script and alt text. The numbers come from `scenario-sweep-summary.json`.
+
 ### Changed
 
 - The generated SQLite file is no longer tracked or packaged, because its bytes differ between SQLite builds. The release ZIP and checksum now match on Python 3.9, 3.11 and 3.14.
