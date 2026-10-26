@@ -4,6 +4,7 @@
 
 ### Added
 
+- `docs/gate-card/`: the deadline-first gate card for the X post in the Rahil Design charcoal system (1080x1080 PNG, 360px and 390px feed screenshots, alt text, build script and check log). The numbers come from `policy-results.csv`; the build stops if a rerun changes them.
 - `docs/x-post-chart/`: the scenario-sweep chart for the X post as a landscape and a square PNG, with its build script and alt text. The numbers come from `scenario-sweep-summary.json`.
 
 ### Changed

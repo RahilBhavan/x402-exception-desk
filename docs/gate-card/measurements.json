@@ -1,0 +1,41 @@
+{
+  "numbers": {
+    "overdue": {
+      "fifo": [
+        "6",
+        "4,428.9"
+      ],
+      "deadline_first": [
+        "6",
+        "1,582.2"
+      ]
+    },
+    "cut_pct": 64,
+    "fewer_cases_pct": 0.0
+  },
+  "min_label_px": 22,
+  "title_px": 48,
+  "title_lines": 2,
+  "slack_bottom_px": 0,
+  "feed": {
+    "360": {
+      "image_px": 326,
+      "scale": 0.8359,
+      "label_px": 18.39,
+      "title_px": 40.12
+    },
+    "390": {
+      "image_px": 356,
+      "scale": 0.9128,
+      "label_px": 20.08,
+      "title_px": 43.82
+    }
+  },
+  "sha256": {
+    "card.html": "1d3d4419791cc5103bdf21c52be161f01ec64efb8db8273168db94c101e65709",
+    "x402-gate-square.png": "94caeca815d3367eb4aaaf31a90e5f4961d79f56877c0897c90d6aeee48a5ab0",
+    "feed-360.png": "ae53051caa065390735ddd3a54833c8cda5a5186064a9ce32110912bfc142555",
+    "feed-390.png": "9c294754b816e62bc51e44b7a555c5322561f8ffb5880c766eb66fbda9a0a455"
+  },
+  "contrast_min": 6.92
+}

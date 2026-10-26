@@ -1,0 +1,1 @@
+Card titled ‘Cut overdue time 64%. Gate failed.’ on 9 synthetic build cases, FIFO against deadline-first. Overdue cases: 6 against 6. Value-weighted overdue time in USDC-minutes: 4,428.9 against 1,582.2, a cut of 64%, highlighted in yellow. The gate needed at least 15% fewer overdue cases and failed. Not held-out. Source: policy-results.csv, as of Oct 26, 2026.

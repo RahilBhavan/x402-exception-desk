@@ -1,0 +1,47 @@
+{
+  "id": "x402-gate-card-square",
+  "set": "x-week-2026-10-26",
+  "template": "rahil-design-card",
+  "accent_meaning": "title-value",
+  "reader": "Payments or product engineer on X, phone width",
+  "decision": "Keep FIFO: deadline-first cut weighted overdue time but missed the case-count gate",
+  "point": "Deadline-first cut value-weighted overdue time 64% on 9 synthetic build cases but left 6 vs 6 overdue cases, so the at-least-15% case-count gate failed.",
+  "comparison": "FIFO against deadline-first on the same 9 synthetic build cases",
+  "form": "table",
+  "values_count": 4,
+  "title": "Cut overdue time 64%. Gate failed.",
+  "caption": "9 synthetic build cases, not held-out. Oct 26, 2026. Source: policy-results.csv",
+  "encodings": [
+    {
+      "mark": "table"
+    }
+  ],
+  "accents": 1,
+  "sources": [
+    {
+      "title": "policy-results.csv",
+      "as_of": "2026-10-26",
+      "url": "https://github.com/RahilBhavan/x402-exception-desk/blob/main/artifacts/generated/policy-results.csv"
+    }
+  ],
+  "alt": "Card titled \u2018Cut overdue time 64%. Gate failed.\u2019 on 9 synthetic build cases, FIFO against deadline-first. Overdue cases: 6 against 6. Value-weighted overdue time in USDC-minutes: 4,428.9 against 1,582.2, a cut of 64%, highlighted in yellow. The gate needed at least 15% fewer overdue cases and failed. Not held-out. Source: policy-results.csv, as of Oct 26, 2026.",
+  "sizes_checked": [
+    "390x390"
+  ],
+  "measurement_basis": "canvas",
+  "feed_width_viewed": true,
+  "measured_by": "docs/gate-card/build_gate_card.py (firefox)",
+  "min_label_px": 22,
+  "point_px": 48,
+  "contrast_min": 6.92,
+  "title_lines": 2,
+  "overflow": [],
+  "system_version": "rahil-design 3.10.0 tokens",
+  "export": "1080x1080",
+  "artifacts": {
+    "card.html": "1d3d4419791cc5103bdf21c52be161f01ec64efb8db8273168db94c101e65709",
+    "x402-gate-square.png": "94caeca815d3367eb4aaaf31a90e5f4961d79f56877c0897c90d6aeee48a5ab0",
+    "feed-360.png": "ae53051caa065390735ddd3a54833c8cda5a5186064a9ce32110912bfc142555",
+    "feed-390.png": "9c294754b816e62bc51e44b7a555c5322561f8ffb5880c766eb66fbda9a0a455"
+  }
+}

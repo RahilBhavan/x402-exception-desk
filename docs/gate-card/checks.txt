@@ -1,0 +1,46 @@
+# Checks for docs/gate-card, run 2026-10-26T12:06:46Z against the committed files
+# Hub tools are in the operations hub: .agents/skills/rahil-design (VERSION 3.10.0) and present-data.
+
+$ sha256sum x402-gate-square.png feed-360.png feed-390.png card.html
+94caeca815d3367eb4aaaf31a90e5f4961d79f56877c0897c90d6aeee48a5ab0  x402-gate-square.png
+ae53051caa065390735ddd3a54833c8cda5a5186064a9ce32110912bfc142555  feed-360.png
+9c294754b816e62bc51e44b7a555c5322561f8ffb5880c766eb66fbda9a0a455  feed-390.png
+1d3d4419791cc5103bdf21c52be161f01ec64efb8db8273168db94c101e65709  card.html
+
+$ python3 design_check.py system
+rahil-design@3.10.0: 19 contrast pairs, 5 pairs x 3 CVD simulations, 15 colours, ok (0 errors)
+
+$ python3 design_check.py lint card.html build_gate_card.py
+exit=0
+
+$ python3 design_check.py feed brief.json
+docs/gate-card/brief.json: at 326px feed width (canvas, 390px inspection) labels 18.4px, point 40.1px: ok
+exit=0
+
+$ pixel_audit.py x402-gate-square.png   (palette check: every pixel a token colour or a blend of two token colours)
+docs/gate-card/x402-gate-square.png: 0.00% of pixels off-system (limit 0.01%)
+exit=0
+
+$ hub social_bars measurement on card.html (390px at 3x: text size, overflow, token fonts, glyph coverage, bundled-font bytes, hidden text, contrast >= 4.5:1)
+{
+  "min_label_px": 22,
+  "largest_px": 48,
+  "title_lines": 2,
+  "overflow": [],
+  "non_token_fonts": [],
+  "missing_glyphs": [],
+  "font_face_errors": []
+}
+exit=0
+
+$ python3 check_figure.py brief.json
+x402-gate-card-square: PASS
+  WARN: no five-second test recorded
+RESULT: PASS
+exit=0
+
+$ python3 review_record.py status x402-gate-square.png
+docs/gate-card/x402-gate-square.png: design review pending (missing)
+
+# Not run: pixel_audit on feed-360.png and feed-390.png. They are the card downscaled by the browser; the resampling filter overshoots (#FFFFFF, #060709) and 4-5% of pixels fall off-system. The audit applies to the card PNG above.
+# Not recorded: a passed review record. The hub gate re-renders the card at 390px x3 (1170px) and needs identical bytes, so a 1080px export cannot pass it; an agent never records a pass.
