@@ -1,0 +1,10 @@
+LESS OVERDUE TIME. GATE STILL FAILED.
+Synthetic data · 9 actionable build cases, not held-out
+6
+overdue cases, same as FIFO
+Value-weighted overdue time (USDC-minutes), FIFO: 4,428.9
+Value-weighted overdue time (USDC-minutes), deadline-first: 1,582.2
+−64%
+Overdue cases, deadline-first: 6
+Gate, set before the run: ≥15% fewer than FIFO's 6, so 5 or fewer
+Source: x402-exception-desk README, commit f05dbe8 · Oct 2026
